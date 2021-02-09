@@ -3,6 +3,9 @@
   <head>
     <title>{% block title %}Mon Academy{% endblock %}</title>
     <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
+
+    {% block extrahead %}
+    {% endblock %}
   </head>
   <body>
     <header>
@@ -21,6 +24,11 @@
       {% block main %}
       {% endblock %}
     </main>
+
+
+    {% block extrascripts %}
+    {% endblock %}
+
     <footer>
       <p>© <a href="https://fossunited.org/">FOSS United Foundation</a> | CC-BY-SA </p>
     </footer>

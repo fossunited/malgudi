@@ -10,7 +10,7 @@ body {
 }
 
 nav, main, footer {
-    padding: 20px;
+    padding: 10px;
 }
 
 nav {
@@ -44,6 +44,61 @@ nav ul.right {
 }
 
 footer {
+    border-top: 1px solid #ddd;
     background-color: #e0e2e4;
     color: #484848;
 }
+footer p {
+    margin: 5px;
+}
+
+.two-column {
+    display: grid;
+    grid-template-columns: 0.95fr 1fr;
+}
+
+.editor textarea {
+    width: 100%;
+    max-width: 100%;
+    min-height: 200px;
+}
+
+.column-header {
+    background: #eee;
+    border: 1px solid #ddd;
+    padding: 5px;
+}
+
+.column {
+    border: 1px solid #ddd;
+}
+
+.column-body {
+    padding: 5px;
+}
+
+.toolbar {
+    margin-bottom: 5px;
+}
+
+.toolbar button {
+    background: #ddd;
+    border-radius: 50%;
+    border: none;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    padding: 0 0 0 0.25rem;
+}
+
+.toolbar button:hover {
+    background-color: #ED225D;
+}
+.toolbar button:hover svg {
+    fill: white;
+}
+
+.toolbar button svg {
+    fill: #ED225D;
+}
+

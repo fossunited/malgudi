@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+
+
+{% block main %}
+<div class="toolbar">
+  <button class="toolbar-button">
+    <svg width="16" height="16" viewBox="0 0 17 17" focusable="false" aria-hidden="true">
+      <path d="M17 8.5L0 17V0z"></path>
+    </svg>
+  </button>
+</div>
+</div>
+
+<div class="two-column">
+  <div id="editor" class="column editor">
+    <div class="column-header">
+      EDITOR
+    </div>
+    <div class="column-body">
+      <form>
+        <textarea id="code">{{sketch.code}}</textarea>
+      </form>
+    </div>
+  </div>
+  <div id="preview" class="column">
+    <div class="column-header">
+      PREVIEW
+    </div>
+    <div class="column-body">
+      Lorem ipsum...
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block extrascripts %}
+
+{% endblock %}
+
