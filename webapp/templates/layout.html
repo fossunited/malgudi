@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+  <head>
+    <title>{% block title %}Mon Academy{% endblock %}</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
+  </head>
+  <body>
+    <header>
+      <nav>
+        <ul>
+          <li><a class="brand" href="/">Mon Academy</a></li>
+          <li><a href="/courses">Courses</a></li>
+        </ul>
+        <ul class="right">
+          <li>Login</li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      {% block main %}
+      {% endblock %}
+    </main>
+    <footer>
+      <p>© <a href="https://fossunited.org/">FOSS United Foundation</a> | CC-BY-SA </p>
+    </footer>
+  </body>
+</html>
