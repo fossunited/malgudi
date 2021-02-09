@@ -35,5 +35,28 @@
 
 {% block extrascripts %}
 
+<link rel="stylesheet" href="{{url_for('static', filename='codemirror/lib/codemirror.css')}}">
+
+<script src="{{url_for('static', filename='codemirror/lib/codemirror.js')}}"></script>
+<script src="{{url_for('static', filename='codemirror/mode/python/python.js')}}"></script>
+<script src="{{url_for('static', filename='codemirror/keymap/sublime.js')}}"></script>
+
+<script src="{{url_for('static', filename='codemirror/addon/edit/matchbrackets.js')}}"></script>
+<script src="{{url_for('static', filename='codemirror/addon/comment/comment.js')}}"></script>
+
+<script type="text/javascript">
+  var editor = CodeMirror.fromTextArea(
+    document.getElementById("code"), {
+    lineNumbers: false,
+    mode: "python",
+    keyMap: "sublime",
+    matchBrackets: true,
+    indentWithTabs: false,
+    tabSize: 2,
+    // extraKeys: {
+    //   'Cmd-Enter': run
+    // }
+  });
+</script>
 {% endblock %}
 
