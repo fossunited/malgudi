@@ -3,7 +3,7 @@
 
 {% block main %}
 <div class="toolbar">
-  <button class="toolbar-button">
+  <button class="toolbar-button" id="run-button">
     <svg width="16" height="16" viewBox="0 0 17 17" focusable="false" aria-hidden="true">
       <path d="M17 8.5L0 17V0z"></path>
     </svg>
@@ -27,7 +27,7 @@
       PREVIEW
     </div>
     <div class="column-body">
-      Lorem ipsum...
+      <pre id="output"></pre>
     </div>
   </div>
 </div>
@@ -45,6 +45,22 @@
 <script src="{{url_for('static', filename='codemirror/addon/comment/comment.js')}}"></script>
 
 <script type="text/javascript">
+  // set the pyodide files URL (packages.json, pyodide.asm.data etc)
+  window.languagePluginUrl = 'https://cdn.jsdelivr.net/pyodide/v0.16.1/full/';
+</script>
+<script src="https://cdn.jsdelivr.net/pyodide/v0.16.1/full/pyodide.js"></script>
+
+<script type="text/javascript">
+  var output; // initialized onload
+
+  window.addEventListener("load", function() {
+    console.log("onload")
+    var b = document.getElementById("run-button");
+    b.setAttribute("onclick", "run()");
+
+    output = document.getElementById("output");
+  })
+
   var editor = CodeMirror.fromTextArea(
     document.getElementById("code"), {
     lineNumbers: false,
@@ -53,10 +69,52 @@
     matchBrackets: true,
     indentWithTabs: false,
     tabSize: 2,
-    // extraKeys: {
-    //   'Cmd-Enter': run
-    // }
+    extraKeys: {
+      'Cmd-Enter': run,
+      'Ctrl-Enter': run
+    }
   });
+
+  function write(text) {
+    output.innerHTML += text;
+  }
+  function clear() {
+    output.innerHTML = "";
+  }
+
+  const PYTHON_INIT = `
+import sys
+class StdoutFile:
+  def __init__(self, elem):
+    self.elem = elem
+
+  def __repr__(self):
+    return "<stdout>"
+
+  def write(self, text):
+    self.elem.innerHTML += text
+
+  def writelines(self, lines):
+    for line in lines:
+      self.write(line)
+
+  def close(self):
+    pass
+
+sys.stdout = StdoutFile(_stdout_element)
+`
+
+  function run() {
+    var output = document.querySelector("#output");
+    output.innerHTML = ""
+    pyodide.globals._stdout_element = output;
+
+    pyodide.runPython(PYTHON_INIT)
+
+    var code = editor.doc.getValue();
+    output = pyodide.runPython(code);
+    console.log(output)
+  }
 </script>
 {% endblock %}
 
