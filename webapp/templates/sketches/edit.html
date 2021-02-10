@@ -106,13 +106,22 @@ sys.stdout = StdoutFile(_stdout_element)
 
   function run() {
     var output = document.querySelector("#output");
+    function _write(text) {
+      output.innerHTML += text;
+    }
+
     output.innerHTML = ""
     pyodide.globals._stdout_element = output;
 
     pyodide.runPython(PYTHON_INIT)
 
     var code = editor.doc.getValue();
-    output = pyodide.runPython(code);
+    try {
+      pyodide.runPython(code);
+    }
+    catch (e) {
+      _write(e.message)
+    }
     console.log(output)
   }
 </script>
