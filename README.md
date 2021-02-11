@@ -6,13 +6,13 @@ The system is very early stages of implementation and lot of things are likely t
 
 ## How to run
 
-Clone the repo.
+Step 1: Clone the repo.
 
 ```
 $ git clone git@github.com/fossunited/malgudi
 ```
 
-Setup a virtualenv and install the dependencies.
+Step 2: Setup a virtualenv and install the dependencies.
 
 ```
 $ python3 -m venv venv
@@ -20,7 +20,13 @@ $ . venv/bin/activate
 $ pip install -r requirements.txt
 ```
 
-Run the development server.
+Step 3: Create a database.
+
+```
+$ createdb malgudi
+```
+
+Step 4: Run the development server.
 
 ```
 $ export FLASK_DEBUG=1
