@@ -12,6 +12,7 @@ migrations, use:
 
     python run.py --migrate
 """
+import sys
 from webapp.app import app
 from webapp.migrate import migrate
 

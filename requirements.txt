@@ -2,4 +2,4 @@ Flask
 psycopg2-binary
 web.py
 gunicorn
--e git+https://github.com/anandology/niftyhacks.git
+-e git+https://github.com/anandology/niftyhacks.git#egg=niftyhacks
