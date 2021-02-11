@@ -81,7 +81,7 @@ footer p {
     margin-bottom: 5px;
 }
 
-.toolbar button {
+.toolbar button.round {
     background: #ddd;
     border-radius: 50%;
     border: none;
@@ -91,7 +91,11 @@ footer p {
     padding: 0 0 0 0.25rem;
 }
 
-.toolbar button:hover {
+.toolbar button {
+    min-height: 40px;
+}
+
+.toolbar button.round:hover {
     background-color: #ED225D;
 }
 .toolbar button:hover svg {

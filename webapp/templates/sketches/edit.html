@@ -3,10 +3,12 @@
 
 {% block main %}
 <div class="toolbar">
-  <button class="toolbar-button" id="run-button">
+  <button class="toolbar-button round" id="run-button">
     <svg width="16" height="16" viewBox="0 0 17 17" focusable="false" aria-hidden="true">
       <path d="M17 8.5L0 17V0z"></path>
     </svg>
+  </button>
+  <button class="toolbar-button" id="save-button">Save
   </button>
 </div>
 </div>
@@ -55,8 +57,13 @@
 
   window.addEventListener("load", function() {
     console.log("onload")
-    var b = document.getElementById("run-button");
-    b.setAttribute("onclick", "run()");
+    document
+      .getElementById("run-button")
+      .setAttribute("onclick", "run()");
+
+    document
+      .getElementById("save-button")
+      .setAttribute("onclick", "saveSketch()");
 
     output = document.getElementById("output");
   })
@@ -124,6 +131,31 @@ sys.stdout = StdoutFile(_stdout_element)
     }
     console.log(output)
   }
+
+  async function saveSketch() {
+    var data = {
+      "mode": "python",
+      "title": "",
+      "code": editor.doc.getValue()
+    }
+    console.log(["saveSketch", data])
+    const url = window.location.href;
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    });
+    // TODO: show success message
+    // TODO: handle error
+
+    console.log("saved");
+
+    if (window.location.href.endsWith("/new")) {
+      var s = await response.json()
+      window.location.href = s.path;
+    }
+  }
 </script>
 {% endblock %}
-
